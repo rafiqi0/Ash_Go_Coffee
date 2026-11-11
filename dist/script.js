@@ -42,6 +42,24 @@ document.querySelectorAll('.reveal').forEach((element) => revealObserver.observe
 
 const bookingForm = document.querySelector('#booking-form');
 const formStatus = document.querySelector('#form-status');
+const ashGoConfig = window.ASH_GO_CONFIG || {};
+
+async function saveEnquiry(payload) {
+  if (!ashGoConfig.supabaseUrl || !ashGoConfig.supabaseAnonKey) return false;
+  const response = await fetch(`${ashGoConfig.supabaseUrl}/rest/v1/event_enquiries`, {
+    method: 'POST',
+    headers: {
+      apikey: ashGoConfig.supabaseAnonKey,
+      Authorization: `Bearer ${ashGoConfig.supabaseAnonKey}`,
+      'Content-Type': 'application/json',
+      Prefer: 'return=minimal',
+    },
+    body: JSON.stringify(payload),
+  });
+  if (!response.ok) throw new Error(`Supabase returned ${response.status}`);
+  return true;
+}
+
 bookingForm?.addEventListener('submit', (event) => {
   event.preventDefault();
   const data = new FormData(bookingForm);
@@ -51,6 +69,27 @@ bookingForm?.addEventListener('submit', (event) => {
   const guests = data.get('guests') || 'jumlah tetamu yang akan disahkan';
   const message = `Hai Ash GO Coffee, saya ${name}. Saya ingin bertanya tentang ${eventType} pada ${date} untuk ${guests} tetamu.`;
   const whatsappUrl = `https://wa.me/601163377360?text=${encodeURIComponent(message)}`;
-  if (formStatus) formStatus.textContent = 'Membuka WhatsApp dengan pertanyaan anda…';
-  window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+  const payload = {
+    name: String(name),
+    event_type: String(eventType),
+    event_date: data.get('date') || null,
+    guest_count: data.get('guests') ? Number(data.get('guests')) : null,
+    source: 'website',
+  };
+
+  if (formStatus) formStatus.textContent = 'Menyimpan pertanyaan anda…';
+  saveEnquiry(payload)
+    .then((saved) => {
+      if (saved) {
+        if (formStatus) formStatus.textContent = 'Terima kasih — pertanyaan anda telah diterima.';
+        bookingForm.reset();
+      } else {
+        if (formStatus) formStatus.textContent = 'Membuka WhatsApp dengan pertanyaan anda…';
+        window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+      }
+    })
+    .catch(() => {
+      if (formStatus) formStatus.textContent = 'Database belum tersedia — membuka WhatsApp sebagai alternatif…';
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    });
 });
