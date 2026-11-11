@@ -119,7 +119,7 @@ h1 em, h2 em { color: var(--green-soft); font-style: italic; }
 
 .menu-section { position: relative; padding-bottom: 150px; }
 .menu-section::before { content: ''; position: absolute; z-index: -1; left: 50%; top: 80px; width: 100vw; height: 75%; transform: translateX(-50%); background-image: radial-gradient(rgba(18,62,43,.08) 1px, transparent 1px); background-size: 15px 15px; mask-image: linear-gradient(to bottom, transparent, black 18%, black 78%, transparent); opacity: .48; }
-.menu-section::after { content: 'FRESHLY POURED'; position: absolute; z-index: -1; right: -130px; top: 58%; color: rgba(18,62,43,.045); font: 700 64px/.85 var(--sans); letter-spacing: .12em; transform: rotate(-90deg); }
+.menu-section::after { content: 'BARU DITUANG'; position: absolute; z-index: -1; right: -130px; top: 58%; color: rgba(18,62,43,.045); font: 700 64px/.85 var(--sans); letter-spacing: .12em; transform: rotate(-90deg); }
 .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 40px; margin-bottom: 42px; }
 .section-heading h2 { margin-bottom: 0; font-size: clamp(45px, 5.3vw, 76px); line-height: .95; }
 .section-heading > p { max-width: 280px; margin-bottom: 4px; color: var(--muted); font-size: 14px; }
@@ -144,7 +144,7 @@ h1 em, h2 em { color: var(--green-soft); font-style: italic; }
 
 .catering { padding-bottom: 145px; }
 .catering-card { position: relative; display: grid; grid-template-columns: 1.1fr .9fr; min-height: 470px; overflow: hidden; background: var(--green); background-image: radial-gradient(circle at 12% 16%, rgba(239,157,78,.2), transparent 15rem), linear-gradient(135deg, rgba(255,255,255,.03), transparent 45%); color: var(--cream); }
-.catering-card::before { content: 'GOOD DAYS'; position: absolute; z-index: 0; right: 27%; bottom: -12px; color: rgba(244,240,231,.055); font: 700 70px/.8 var(--sans); letter-spacing: .14em; transform: rotate(-10deg); }
+.catering-card::before { content: 'HARI BAIK'; position: absolute; z-index: 0; right: 27%; bottom: -12px; color: rgba(244,240,231,.055); font: 700 70px/.8 var(--sans); letter-spacing: .14em; transform: rotate(-10deg); }
 .catering-copy { padding: 75px 8% 65px; }
 .catering-copy h2 { max-width: 490px; margin-bottom: 20px; font-size: clamp(46px, 5.4vw, 78px); line-height: .97; }
 .catering-copy > p:not(.eyebrow) { max-width: 440px; color: rgba(244,240,231,.7); font-size: 15px; }

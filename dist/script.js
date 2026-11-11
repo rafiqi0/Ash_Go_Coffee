@@ -45,12 +45,12 @@ const formStatus = document.querySelector('#form-status');
 bookingForm?.addEventListener('submit', (event) => {
   event.preventDefault();
   const data = new FormData(bookingForm);
-  const name = data.get('name') || 'there';
-  const eventType = data.get('event') || 'an event';
-  const date = data.get('date') || 'a date to be confirmed';
-  const guests = data.get('guests') || 'guest count to be confirmed';
-  const message = `Hi Ash GO Coffee, I'm ${name}. I'd like to enquire about ${eventType} on ${date} for ${guests} guests.`;
+  const name = data.get('name') || 'di sini';
+  const eventType = data.get('event') || 'sebuah acara';
+  const date = data.get('date') || 'tarikh yang akan disahkan';
+  const guests = data.get('guests') || 'jumlah tetamu yang akan disahkan';
+  const message = `Hai Ash GO Coffee, saya ${name}. Saya ingin bertanya tentang ${eventType} pada ${date} untuk ${guests} tetamu.`;
   const whatsappUrl = `https://wa.me/601163377360?text=${encodeURIComponent(message)}`;
-  if (formStatus) formStatus.textContent = 'Opening WhatsApp with your enquiry…';
+  if (formStatus) formStatus.textContent = 'Membuka WhatsApp dengan pertanyaan anda…';
   window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
 });
